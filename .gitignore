@@ -1,0 +1,18 @@
+.DS_Store
+
+# docker-compose
+docker-compose/.DS_Store
+docker-compose/data/
+
+# docker-swarm
+docker-swarm/.DS_Store
+
+# my-backend
+my-backend/.DS_Store
+my-backend/.idea/
+my-backend/target/
+
+# my-frontend
+my-frontend/.DS_Store
+my-frontend/build/
+my-frontend/node_modules/
