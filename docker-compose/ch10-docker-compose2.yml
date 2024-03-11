@@ -7,6 +7,6 @@ services:
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=true
       - MARIADB_DATABASE=mydb
     ports:
-      - 13306:3306
+      - 3306:3306
     volumes: 
       - /Users/dowonlee_1/Desktop/Work/14.online/docker_examples/docker-compose/data:/var/lib/mysql # shared folder
