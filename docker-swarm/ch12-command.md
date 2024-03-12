@@ -35,25 +35,3 @@ $ docker run --privileged --name worker02 -itd -p 30022:22 -p 8083:8080 -e conta
 
 }
 ````
-
-#### Docker Swarm에서 Service 생성
-````
-$ manager> docker service create --replicas 1 --publish 80:80 --name nginx registry:5000/edowon0623/nginx:latest
-$ manager> docker service ls 
-$ manager> docker service scale nginx=3
-$ manager> docker service ps nginx
-$ manager> docker service rm nginx
-````
-
-
-#### Docker Swarm에서 Stack 생성
-````
-$ manager> docker network create --driver overlay my-overlay-network
-$ manager> docker stack deploy -c /stack/stack_sample.yml nginx
-$ manager> docker stack ls 
-$ manager> docker stack services nginx 
-$ manager> docker stack ps nginx
-$ manager> docker service rm nginx
-````
-
-
