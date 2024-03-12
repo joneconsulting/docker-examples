@@ -10,7 +10,7 @@ services:
 
   manager:
     container_name: manager
-    image: docker:19.03.5-dind
+    image: edowon0623/docker:latest
     privileged: true
     tty: true
     ports:
@@ -21,12 +21,16 @@ services:
     expose: 
       - 3375
     command: "--insecure-registry registry:5000"
+    environment:
+      - container=docker
     volumes: 
       - "./stack:/stack"
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroup: host
 
   worker01:
     container_name: work01
-    image: docker:19.03.5-dind
+    image: edowon0623/docker:latest
     privileged: true
     tty: true
     depends_on: 
@@ -37,10 +41,15 @@ services:
       - 7946/udp
       - 4789/udp
     command: "--insecure-registry registry:5000"
+    environment:
+      - container=docker
+    volumes: 
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroup: host
 
   worker02:
     container_name: work02
-    image: docker:19.03.5-dind
+    image: edowon0623/docker:latest
     privileged: true
     tty: true
     depends_on: 
@@ -51,18 +60,26 @@ services:
       - 7946/udp
       - 4789/udp
     command: "--insecure-registry registry:5000"
+    environment:
+      - container=docker
+    volumes: 
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroup: host
 
-  worker03:
-    container_name: work03
-    image: docker:19.03.5-dind
-    privileged: true
-    tty: true
-    depends_on: 
-      - manager
-      - registry
-    expose: 
-      - 7946
-      - 7946/udp
-      - 4789/udp
-    command: "--insecure-registry registry:5000"
+  # worker03:
+  #   container_name: work03
+  #   image: edowon0623/docker:latest
+  #   privileged: true
+  #   tty: true
+  #   depends_on: 
+  #     - manager
+  #     - registry
+  #   expose: 
+  #     - 7946
+  #     - 7946/udp
+  #     - 4789/udp
+  #   command: "--insecure-registry registry:5000"
+      # volumes: 
+      #   - /sys/fs/cgroup:/sys/fs/cgroup:rw
+      # cgroup: host
       

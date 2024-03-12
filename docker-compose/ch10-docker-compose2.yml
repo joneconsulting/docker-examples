@@ -9,4 +9,4 @@ services:
     ports:
       - 3306:3306
     volumes: 
-      - /Users/dowonlee_1/Desktop/Work/14.online/docker_examples/docker-compose/data:/var/lib/mysql # shared folder
+      - C:\work\git\docker-examples\docker-compose\data:/var/lib/mysql # shared folder

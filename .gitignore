@@ -6,6 +6,7 @@ docker-compose/data/
 
 # docker-swarm
 docker-swarm/.DS_Store
+docker-swarm/registry-data
 
 # my-backend
 my-backend/.DS_Store
