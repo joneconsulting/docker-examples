@@ -8,7 +8,7 @@
 }
 ````
 
-#### Docker Swarm에서 Service 생성
+#### Docker Swarm에서 Service 생성 (13-3)
 ````
 $ manager> docker service create --replicas 1 --publish 80:80 --name nginx registry:5000/edowon0623/nginx:latest
 $ manager> docker service ls 
