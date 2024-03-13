@@ -6,7 +6,6 @@ $ docker service update --image nginx:1.10 mynginx1
 
 $ docker service create --replicas 2 --name mynginx2 --update-delay 10s \ 
 --update-parallelism 2 nginx:1.24 
-
 ````
 
 #### Docker Save / Load (이미지)
@@ -30,14 +29,14 @@ $ docker commit 컨테이너명 이미지명:테그명
 
 #### Docker Swarm Rollback
 ````
-$ docker service create --name redis \
-      --replicas 4 --rollback-delay 10s --rollback-parallelism 1 \
-      --rollback-failure-action pause redis:7.0.3
+$ docker service create --name myngnix \
+      --replicas 2 --rollback-delay 10s --rollback-parallelism 1 \
+      --rollback-failure-action pause ngnix:1.10
 
 $ docker service inspect redis --pretty
 
-$ docker service update --image redis:7.0.4 redis
+$ docker service update --image ngnix:1.24 mynginx
 
-$ docker service update --rollback redis
+$ docker service update --rollback mynginx
 ````
 
