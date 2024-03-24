@@ -3,6 +3,9 @@ package com.example.catalogservice.controller;
 import com.example.catalogservice.jpa.CatalogEntity;
 import com.example.catalogservice.service.CatalogService;
 import com.example.catalogservice.vo.ResponseCatalog;
+import io.micrometer.core.annotation.Timed;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.cloud.client.ServiceInstance;
@@ -22,10 +25,24 @@ public class CatalogController {
     Environment env;
     CatalogService catalogService;
 
+    Counter visitCounter;
+
+    public CatalogController(MeterRegistry registry) {
+        visitCounter = Counter.builder("visit_counter")
+                .description("Number of visits to the site")
+                .register(registry);
+    }
+
     @Autowired
     public CatalogController(Environment env, CatalogService catalogService) {
         this.env = env;
         this.catalogService = catalogService;
+    }
+
+    @GetMapping("/api/health")
+    @Timed("api.health")
+    public String health() {
+        return "It works.";
     }
 
     @GetMapping("/catalogs")

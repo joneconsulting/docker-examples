@@ -23,3 +23,12 @@ spring:
 logging:
   level:
     com.example.catalogservice: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh, refresh, metrics, prometheus, info
+  metrics:
+    tags:
+      application: ${spring.application.name}
