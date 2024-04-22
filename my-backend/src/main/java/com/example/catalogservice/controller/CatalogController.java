@@ -3,6 +3,7 @@ package com.example.catalogservice.controller;
 import com.example.catalogservice.jpa.CatalogEntity;
 import com.example.catalogservice.service.CatalogService;
 import com.example.catalogservice.vo.ResponseCatalog;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.cloud.client.ServiceInstance;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@Slf4j
 public class CatalogController {
     Environment env;
     CatalogService catalogService;
@@ -30,12 +32,16 @@ public class CatalogController {
 
     @GetMapping("/catalogs")
     public ResponseEntity<List<ResponseCatalog>> getCatalogs() {
+        log.debug("[called catalogs]", "MY-MESSAGE");
+
         Iterable<CatalogEntity> catalogList = catalogService.getAllCatalogs();
 
         List<ResponseCatalog> result = new ArrayList<>();
         catalogList.forEach(v -> {
             result.add(new ModelMapper().map(v, ResponseCatalog.class));
         });
+
+        log.debug("[catalog size={}]", result.size());
 
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
